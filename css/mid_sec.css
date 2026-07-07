@@ -1,0 +1,37 @@
+.mid{
+  position:relative;
+  min-height:100vh;
+  display:flex; align-items:center;
+  padding-top:6rem; padding-bottom:3rem;
+  overflow:hidden;
+  background-color: var(--concrete);
+  }
+
+  .body__display{
+  position: absolute; inset:0; z-index:0; opacity:.35; pointer-events:none;
+  background-image:
+    linear-gradient(var(--concrete-deep) 1px, transparent 1px),
+    linear-gradient(90deg, var(--concrete-deep) 1px, transparent 1px);
+  background-size: 45px 45px;
+  
+}
+
+.mid_txt{ max-width:42rem; }
+.content{
+  position:relative; z-index:1;
+  display:grid; grid-template-columns:1.15fr .85fr; gap:2rem; align-items:end;
+  width:100%;
+}
+.midline-line{
+  font-size:clamp(2.3rem,6vw,6rem);
+  line-height:1.05;
+  font-weight:500;
+
+}
+.mid__sub{
+  font-size:1.05rem; line-height:1.65; margin-top:1.6rem; max-width:20rem; color:var(--ink-soft);
+}
+
+@media screen and (max-width: 768px){
+  .content{ grid-template-columns:1fr; gap:3rem; }
+}

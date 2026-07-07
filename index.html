@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nrl.com</title>
+
+    <!---------------- import ---------------->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+
+    <!---------------- script ---------------->
+    <script src="js/ham.js" defer></script>
+    <script src="js/mid.js" defer></script>
+    <script src="js/slidespanel.js" defer></script>
+
+    <!---------------- style ---------------->
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/sec.css">
+    <link rel="stylesheet" href="css/mid_sec.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/sec.css">
+    <link rel="stylesheet" href="css/solutions.css">
+    <link rel="stylesheet" href="css/faq.css">
+    <link rel="stylesheet" href="css/layout.css">
+</head>
+
+<body>
+    <style>
+        /* ---------- VARIABLES ---------- */
+        :root {
+            --accent: #0039d4;
+            --text: #fff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --concrete: #B7B0A4;
+            --concrete-deep: #9C9486;
+            --paper: #EDE8DE;
+            --ink: #313131;
+            --ink-soft: #cccbc9;
+            --rust: #1e5aa8;
+            --rust-bright: #0d53a3;
+            --rust-deep: #1335f5;
+            --steel: #6B7178;
+            --safety: #3b6dd9;
+            --line: rgba(27, 24, 20, 0.18);
+            --line-on-ink: rgba(237, 232, 222, 0.22);
+            --ff-display: 'Big Shoulders Display', sans-serif;
+            --ff-body: 'Archivo', sans-serif;
+            --ff-mono: 'IBM Plex Mono', monospace;
+            --container: 1280px;
+            --pad-inline: clamp(1.25rem, 4vw, 3rem);
+            --section-pad: clamp(4.5rem, 9vw, 8rem);
+            --cc-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+                Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    
+        }
+    
+        /* ---------- GLOBAL ---------- */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+    
+        html,
+        body {
+            margin: 0;
+            scroll-behavior: smooth;
+            background-color: var(--paper);
+        }
+    
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    
+        button {
+            color: inherit;
+            font: inherit;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+    
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            font-weight: normal;
+        }
+    
+        body {
+            font-family: var(--cc-font-family);
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text);
+    
+        }
+    
+        /* ---------- NAVBAR ---------- */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+    
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            padding: 14px 24px;
+            border-radius: 3px;
+    
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            z-index: 1000;
+        }
+    
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+    
+        .logo span {
+            color: var(--accent);
+        }
+    
+        /* ---------- DESKTOP LINKS ---------- */
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+    
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            position: relative;
+        }
+    
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0%;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+    
+        .nav-links a:hover::after {
+            color: var(--accent);
+            width: 100%;
+        }
+    
+        /* ---------- HAMBURGER ---------- */
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+    
+        .menu-btn span {
+            width: 28px;
+            height: 3px;
+            background: var(--text);
+            border-radius: 2px;
+        }
+    
+        /* ---------- FULLSCREEN MENU ---------- */
+        .fullscreen-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
+    
+        .fullscreen-menu ul {
+            list-style: none;
+            text-align: center;
+        }
+    
+        .fullscreen-menu li {
+            font-size: 2.2rem;
+            margin: 20px 0;
+        }
+    
+        .fullscreen-menu a {
+            text-decoration: none;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+    
+        .fullscreen-menu a:hover {
+            color: var(--text);
+        }
+    
+        /* ---------- MOBILE ---------- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+    
+            .menu-btn {
+                display: flex;
+            }
+    
+            .hero_text {
+                font-size: 3.5rem;
+                padding-left: 1rem;
+            }
+    
+            .par_text {
+                top: 800px;
+            }
+    
+            .slides-wrapper {
+                margin-top: 5px;
+            }
+        }
+    
+    
+        /* ============================================================
+       PROCESS / STRATA
+       ============================================================ */
+        .process__layout {
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: clamp(2rem, 5vw, 4rem);
+            align-items: center;
+        }
+    
+        .strata {
+            position: relative;
+            padding-bottom: 2.4rem;
+        }
+    
+        .strata__ground {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 2.4rem;
+            height: 1px;
+            background: var(--ink);
+        }
+    
+        .strata__ground::after {
+            content: 'GROUND LEVEL · 0.0M';
+            position: absolute;
+            right: 0;
+            top: -1.4rem;
+            font-family: var(--ff-mono);
+            font-size: .65rem;
+            letter-spacing: .08em;
+            color: var(--ink-soft);
+        }
+    
+        .strata__stack {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 6px;
+        }
+    
+        .layer {
+            height: 64px;
+            position: relative;
+            transition: transform .6s cubic-bezier(.2, .6, .2, 1), opacity .5s ease;
+            display: flex;
+            align-items: center;
+            padding-inline: 1rem;
+        }
+    
+        .js .layer {
+            transform: scaleY(0);
+            transform-origin: bottom;
+            opacity: 0;
+        }
+    
+        .process__layout.in-view .layer {
+            opacity: 1;
+            transform: scaleY(1);
+        }
+    
+        .process__layout.in-view .layer--foundation {
+            transition-delay: 0s;
+        }
+    
+        .process__layout.in-view .layer--structure {
+            transition-delay: .18s;
+        }
+    
+        .process__layout.in-view .layer--envelope {
+            transition-delay: .36s;
+        }
+    
+        .process__layout.in-view .layer--finish {
+            transition-delay: .54s;
+        }
+    
+        .layer--foundation {
+            background: var(--ink);
+            color: var(--paper);
+            height: 54px;
+        }
+    
+        .layer--structure {
+            background: var(--steel);
+            color: var(--paper);
+        }
+    
+        .layer--envelope {
+            background: var(--concrete-deep);
+        }
+    
+        .layer--finish {
+            background: var(--paper);
+            border: 1px solid var(--line);
+        }
+    
+        .layer__mark {
+            font-family: var(--ff-mono);
+            font-size: .68rem;
+            letter-spacing: .06em;
+            opacity: .85;
+            min-width: 4.4rem;
+        }
+    
+        .layer__name {
+            font-family: var(--ff-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.05rem;
+            margin-left: .8rem;
+        }
+    
+        .process__notes {
+            border-top: 1px solid var(--line);
+        }
+    
+        .process__notes li {
+            padding: 1.4rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+    
+        .process__notes .p-mark {
+            font-family: var(--ff-mono);
+            font-size: .72rem;
+            color: var(--rust);
+            letter-spacing: .06em;
+        }
+    
+        .process__notes .p-title {
+            font-family: var(--ff-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.25rem;
+            margin-top: .25rem;
+        }
+    
+        .process__notes p {
+            margin-top: .4rem;
+            color: var(--ink-soft);
+            line-height: 1.6;
+            max-width: 34rem;
+        }
+    
+        /* ============================================================
+       STATS
+       ============================================================ */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+    
+        .stats li {
+            padding: 2.4rem var(--pad-inline);
+            border-right: 1px solid var(--line-on-ink);
+            text-align: left;
+        }
+    
+        .stats li:last-child {
+            border-right: 0;
+        }
+    
+        .stat__num {
+            font-family: var(--ff-mono);
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            color: var(--rust-bright);
+        }
+    
+        .stat__label {
+            font-family: var(--ff-mono);
+            font-size: .7rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: rgba(237, 232, 222, .7);
+            margin-top: .5rem;
+        }
+    
+        /* ============================================================
+       CTA
+       ============================================================ */
+        .cta {
+            position: relative;
+            text-align: left;
+            overflow: hidden;
+        }
+    
+        .cta__grid {
+            position: absolute;
+            inset: 0;
+            opacity: .4;
+            pointer-events: none;
+            background-image: linear-gradient(var(--line-on-ink) 1px, transparent 1px), linear-gradient(90deg, var(--line-on-ink) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+    
+        .cta__inner {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+    
+        .cta h2 {
+            font-size: clamp(2.6rem, 7vw, 5.2rem);
+            max-width: 36rem;
+        }
+    
+        .cta__right {
+            max-width: 22rem;
+        }
+    
+        .cta__right p {
+            line-height: 1.6;
+            color: rgba(237, 232, 222, .78);
+            margin-bottom: 1.4rem;
+        }
+    
+        .cta .contact-mono {
+            margin-top: 2rem;
+            font-family: var(--ff-mono);
+            font-size: .85rem;
+            color: rgba(237, 232, 222, .7);
+            line-height: 1.8;
+        }
+    
+        /* ============================================================
+       FOOTER
+       ============================================================ */
+        .footer {
+            padding-top: var(--section-pad);
+            padding-bottom: 2rem;
+        }
+    
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 1.4fr .8fr .8fr;
+            gap: 2.5rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--line-on-ink);
+        }
+    
+        .footer__brand {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            font-family: var(--ff-mono);
+            font-size: 1.05rem;
+        }
+    
+        .footer__brand svg {
+            width: 20px;
+            height: 20px;
+        }
+    
+        .footer p.tag {
+            margin-top: 1rem;
+            max-width: 22rem;
+            color: rgba(237, 232, 222, .7);
+            line-height: 1.6;
+        }
+    
+        .footer h3 {
+            font-family: var(--ff-mono);
+            font-size: .7rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(237, 232, 222, .55);
+            margin-bottom: 1rem;
+        }
+    
+        .footer__links li {
+            margin-bottom: .7rem;
+            font-size: .95rem;
+        }
+    
+        .footer__links a:hover {
+            color: var(--rust);
+        }
+    
+        .footer address {
+            font-family: var(--ff-mono);
+            font-style: normal;
+            font-size: .85rem;
+            line-height: 1.9;
+            color: rgba(237, 232, 222, .78);
+        }
+    
+        .footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.6rem;
+            font-family: var(--ff-mono);
+            font-size: .72rem;
+            letter-spacing: .04em;
+            color: rgba(237, 232, 222, .55);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+    
+        .back-top {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+        }
+    
+        .back-top svg {
+            width: 14px;
+            height: 14px;
+            transition: transform .2s ease;
+        }
+    
+        .back-top:hover svg {
+            transform: translateY(-3px);
+        }
+    
+        /* ============================================================
+       PROCESS / STRATA
+       ============================================================ */
+        .process__layout {
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: clamp(2rem, 5vw, 4rem);
+            align-items: center;
+        }
+    
+        .strata {
+            position: relative;
+            padding-bottom: 2.4rem;
+        }
+    
+        .strata__ground {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 2.4rem;
+            height: 1px;
+            background: var(--ink);
+        }
+    
+        .strata__ground::after {
+            content: 'GROUND LEVEL · 0.0M';
+            position: absolute;
+            right: 0;
+            top: -1.4rem;
+            font-family: var(--ff-mono);
+            font-size: .65rem;
+            letter-spacing: .08em;
+            color: var(--ink-soft);
+        }
+    
+        .strata__stack {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 6px;
+        }
+    
+        .layer {
+            height: 64px;
+            position: relative;
+            transition: transform .6s cubic-bezier(.2, .6, .2, 1), opacity .5s ease;
+            display: flex;
+            align-items: center;
+            padding-inline: 1rem;
+        }
+    
+        .js .layer {
+            transform: scaleY(0);
+            transform-origin: bottom;
+            opacity: 0;
+        }
+    
+        .process__layout.in-view .layer {
+            opacity: 1;
+            transform: scaleY(1);
+        }
+    
+        .process__layout.in-view .layer--foundation {
+            transition-delay: 0s;
+        }
+    
+        .process__layout.in-view .layer--structure {
+            transition-delay: .18s;
+        }
+    
+        .process__layout.in-view .layer--envelope {
+            transition-delay: .36s;
+        }
+    
+        .process__layout.in-view .layer--finish {
+            transition-delay: .54s;
+        }
+    
+        .layer--foundation {
+            background: var(--ink);
+            color: var(--paper);
+            height: 54px;
+        }
+    
+        .layer--structure {
+            background: var(--steel);
+            color: var(--paper);
+        }
+    
+        .layer--envelope {
+            background: var(--concrete-deep);
+        }
+    
+        .layer--finish {
+            background: var(--paper);
+            border: 1px solid var(--line);
+        }
+    
+        .layer__mark {
+            font-family: var(--ff-mono);
+            font-size: .68rem;
+            letter-spacing: .06em;
+            opacity: .85;
+            min-width: 4.4rem;
+        }
+    
+        .layer__name {
+            font-family: var(--ff-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.05rem;
+            margin-left: .8rem;
+        }
+    
+        .process__notes {
+            border-top: 1px solid var(--line);
+        }
+    
+        .process__notes li {
+            padding: 1.4rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+    
+        .process__notes .p-mark {
+            font-family: var(--ff-mono);
+            font-size: .72rem;
+            color: var(--rust);
+            letter-spacing: .06em;
+        }
+    
+        .process__notes .p-title {
+            font-family: var(--ff-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.25rem;
+            margin-top: .25rem;
+        }
+    
+        .process__notes p {
+            margin-top: .4rem;
+            color: var(--ink-soft);
+            line-height: 1.6;
+            max-width: 34rem;
+        }
+    
+        /* ============================================================
+       STATS
+       ============================================================ */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+    
+        .stats li {
+            padding: 2.4rem var(--pad-inline);
+            border-right: 1px solid var(--line-on-ink);
+            text-align: left;
+        }
+    
+        .stats li:last-child {
+            border-right: 0;
+        }
+    
+        .stat__num {
+            font-family: var(--ff-mono);
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            color: var(--rust-bright);
+        }
+    
+        .stat__label {
+            font-family: var(--ff-mono);
+            font-size: .7rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: rgba(237, 232, 222, .7);
+            margin-top: .5rem;
+        }
+    </style>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#" style="text-decoration: none; color: #fff;">NOTCH</a>
+        </div>
+
+        <div class="menu-btn" id="menuBtn">
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#">Services</a>
+            <a href="#">Projects</a>
+            <a href="#">About</a>
+            <a href="#">Profile</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <!-- FULLSCREEN MENU -->
+    <div class="fullscreen-menu" id="fsMenu">
+        <ul>
+
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+    <!-- hero section -->
+    <section class="hero" id="hero">
+        <div class="hero__display" aria-hidden="true"></div>
+        <div class="container hero__content">
+            <div class="hero_txt">
+                <span class="eyehead">Notch at the core</span>
+                <h1 class="hero_headline h-display">
+                    <span class="line-wrap"><span class="headline-line">
+                            <div
+                                style="position: relative; display: inline-block; translate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+                                Beyond</div>
+                        </span></span>
+                    <span class="line-wrap"><span class="headlne-line">
+                            <div
+                                style="position: relative; display: inline-block; translate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+                                Beyond</div>
+                        </span></span>
+                    <span class="line-wrap"><span class="headline-line">
+                            <div
+                                style="position: relative; display: inline-block; translate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+                                Beyond</div>
+                        </span></span>
+                </h1>
+                <p class="hero__sub"
+                    style="position: relative; display: inline-block; translate: none; scale: none;opacity: 1;visibility: inherit;">
+                    we design&amp;build in raw materials&ndash;concrete, steel, stone. We don't diguise how a building
+                    is made that the design.</p>
+                <div class="hero__actions">
+                    <a href="#sites" class="btn"> View Sites</a>
+                    <a href="#process" class="btn btn--ghost"> Our Process</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section-->
+    <section class="mid">
+        <div class="body__display" aria-hidden="true"></div>
+        <div class="container content">
+            <div class="mid_txt">
+                <span class="eyehead">Overview of our Work</span>
+                <div class="section-mid__content">
+                    <h2 class="midline-line spliter">
+                        <span class="line-wrap">
+                            <span class="midline">
+                                <div
+                                    style="position: relative; display: inline-block; translate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+                                    We design and build in raw materials&ndash;concrete, steel, stone. We don't disguise
+                                    how a building is made that the design.
+                                </div>
+                            </span>
+                        </span>
+                    </h2>
+                </div>
+            </div>
+            <p class="mid__sub"
+                style="position: relative; display: inline-block; translate: none; scale: none;opacity: 1;visibility: inherit;">
+                we design&amp;build in raw materials&ndash;concrete, steel, stone. We don't diguise how a building is
+                made that the design.</p>
+        </div>
+    </section>
+
+
+    <!-- the second section -->
+     <section class="solution_ac">
+        <div class="grid-line"></div>
+        <div class="container content sect ">
+            <div class="mid_txt">
+                <span class="eyehead">Overview of our Work</span>
+                <div class=" griddleft">
+                    
+                </div>
+                <div class="griddright"></div>
+                <div class="bottom-line"></div>
+     </section>
+
+
+    <!-- ============================================================
+     PROCESS / STRATA
+     ============================================================ -->
+    <section class="section section--paper" id="process">
+        <div class="container">
+            <div class="section-head">
+                <span class="eyebrow reveal">How We Build</span>
+                <h2 class="h-display reveal reveal-delay-1">Four layers, poured in order.</h2>
+            </div>
+            <div class="process__layout">
+                <div class="strata">
+                    <div class="strata__stack">
+                        <div class="layer layer--foundation"><span class="layer__mark">&minus;3.0M</span><span
+                                class="layer__name">Foundation</span></div>
+                        <div class="layer layer--structure"><span class="layer__mark">0.0M</span><span
+                                class="layer__name">Structure</span></div>
+                        <div class="layer layer--envelope"><span class="layer__mark">+4.5M</span><span
+                                class="layer__name">Envelope</span></div>
+                        <div class="layer layer--finish"><span class="layer__mark">+8.0M</span><span
+                                class="layer__name">Finish</span></div>
+                    </div>
+                    <div class="strata__ground"></div>
+                </div>
+                <ul class="process__notes">
+                    <li>
+                        <span class="p-mark">&minus;3.0M</span>
+                        <h3 class="p-title">Foundation</h3>
+                        <p>Reinforced footings, poured to depth and left to cure before anything else happens on site.
+                        </p>
+                    </li>
+                    <li>
+                        <span class="p-mark">0.0M</span>
+                        <h3 class="p-title">Structure</h3>
+                        <p>A concrete core or steel frame — whichever carries the load most honestly for that site.</p>
+                    </li>
+                    <li>
+                        <span class="p-mark">+4.5M</span>
+                        <h3 class="p-title">Envelope</h3>
+                        <p>Facade, glazing and weatherproofing, sized to the climate rather than to a standard
+                            catalogue.</p>
+                    </li>
+                    <li>
+                        <span class="p-mark">+8.0M</span>
+                        <h3 class="p-title">Finish</h3>
+                        <p>Floors, fixtures, final inspection. The building is signed off, not just switched on.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+     STATS
+     ============================================================ -->
+    <section class="section--ink on-ink" style="padding-block:0;">
+        <noscript>
+            <style>
+                .stat__num {
+                    visibility: hidden;
+                    position: relative;
+                }
+
+                .stat__num::after {
+                    content: attr(data-count);
+                    visibility: visible;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
+            </style>
+        </noscript>
+        <ul class="stats">
+            <li><span class="stat__num" data-count="14">0</span><br><span class="stat__label">Years in Practice</span>
+            </li>
+            <li><span class="stat__num" data-count="62">0</span><br><span class="stat__label">Sites Delivered</span>
+            </li>
+            <li><span class="stat__num" data-count="0">0</span><br><span class="stat__label">Lost-Time Incidents</span>
+            </li>
+            <li><span class="stat__num" data-count="3">0</span><br><span class="stat__label">Countries of Work</span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- ============================================================
+     CTA
+     ============================================================ -->
+    <section class="section section--ink on-ink cta" id="contact">
+        <div class="cta__grid" aria-hidden="true"></div>
+        <div class="container cta__inner">
+            <h2 class="h-display reveal">Let's break ground.</h2>
+            <div class="cta__right reveal reveal-delay-1">
+                <p>Tell us about the site. We'll tell you what it can carry.</p>
+                <a href="mailto:studio@formwork.build" class="btn btn--invert">Start a project</a>
+                <div class="contact-mono">
+                    EMAIL — info@nrl.com<br>
+                    PHONE — +00 000 0000<br>
+                    SITE — Vorna Valley, District.rd, lusaka
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer class="footer section--ink on-ink">
+        <div class="container">
+            <div class="footer__grid">
+                <div>
+                    <div class="footer__brand">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5 5h14v3h-4v8h4v3H5v-3h4V8H5z" fill="currentColor" />
+                        </svg>
+                        FORM/WORK
+                    </div>
+                    <p class="tag">Design&ndash;build studio working in concrete, steel and stone.</p>
+                </div>
+                <div>
+                    <h3>Sitemap</h3>
+                    <ul class="footer__links">
+                        <li><a href="#sites">Sites</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#studio">Studio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <address>
+                        Vorna Valley, District.rd, lusaka<br>
+                        info@nrl.com<br>
+                        +00 000 0000
+                    </address>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span>&copy; 2026 FORM/WORK STUDIO. ALL RIGHTS RESERVED.</span>
+                <a href="#hero" class="back-top">Back to top
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 19V5M5 12l7-7 7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+     PROJECT MODAL
+     ============================================================ -->
+    <div class="modal-backdrop" id="modalBackdrop">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal__close" id="modalClose" aria-label="Close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 5l14 14M19 5L5 19" />
+                </svg>
+            </button>
+            <div class="modal__art" id="modalArt"></div>
+            <div class="modal__body">
+                <p class="modal__spec" id="modalSpec"></p>
+                <h3 class="modal__title" id="modalTitle"></h3>
+                <p id="modalDescShort"></p>
+                <p id="modalDescLong"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>gsap.registerPlugin(SplitText, ScrollTrigger);
+
+console.clear();
+
+gsap.set(".spliter", { opacity: 1 });
+
+document.fonts.ready.then(() => {
+  let contents = gsap.utils.toArray(".content");
+
+  contents.forEach((content) => {
+    let text = content.querySelector(".spliter");
+    let animation;
+
+    SplitText.create(text, {
+      type: "words,lines",
+      mask: "lines",
+      linesClass: "line",
+      autoSplit: true,
+      onSplit: (instance) => {
+        console.log("split")
+        return gsap.from(instance.lines, {
+          yPercent: 120,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: content,
+            // markers: true,
+            scrub: true,
+            start: "clamp(top center)",
+            end: "clamp(bottom center)"
+          }
+        });
+      }
+    });
+  });
+});
+</script>
+    <script>  /* ---------- SCROLL REVEAL( PANELS ) ---------- */
+    gsap.registerPlugin(ScrollTrigger);
+
+    var panels = gsap.utils.toArray(".section");
+    panels.pop();
+
+    panels.forEach((panel, i) => {
+
+      // Get the element holding the content inside the panel
+      let innerpanel = panel.querySelector(".section-inner");
+
+      // Get the Height of the content inside the panel
+      let panelHeight = innerpanel.offsetHeight;
+      console.log(panelHeight)
+
+      // Get the window height
+      let windowHeight = window.innerHeight;
+
+      let difference = panelHeight - windowHeight;
+
+      // ratio (between 0 and 1) representing the portion of the overall animation that's for the fake-scrolling.
+      // We know that the scale & fade should happen over the course of 1 windowHeight, 
+      // so we can figure out the ratio based on how far we must fake-scroll
+      let fakeScrollRatio = difference > 0 ? (difference / (difference + windowHeight)) : 0;
+
+      // if we need to fake scroll (because the panel is taller than the window), add the appropriate amount of margin to the bottom so that the next element comes in at the proper time.
+      if (fakeScrollRatio) {
+        panel.style.marginBottom = panelHeight * fakeScrollRatio + "px";
+      }
+
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: panel,
+          start: "bottom bottom",
+          end: () => fakeScrollRatio ? `+=${innerpanel.offsetHeight}` : "bottom top",
+          pinSpacing: false,
+          pin: true,
+          scrub: true
+        }
+      });
+
+      // fake scroll. We use 1 because that's what the rest of the timeline consists of (0.9 scale + 0.1 fade)
+      if (fakeScrollRatio) {
+        tl.to(innerpanel, { yPercent: -100, y: window.innerHeight, duration: 1 / (1 - fakeScrollRatio) - 1, ease: "none" });
+      }
+      tl.fromTo(panel, { scale: 1, opacity: 1 }, { scale: 0.7, opacity: 0.5, duration: 0.9 })
+        .to(panel, { opacity: 0, duration: 0.1 });
+    });
+</script>
+    <script></script>
+</body>
+
+</html>

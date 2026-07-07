@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nrl/about</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+    <style>
+        * {
+            box-sizing: border-box;
+            --color-surface50: #252525;
+            --color-surface-white: #fffce1;
+        }
+        body {
+            margin: 0;
+            font-family: "Signika Negative", sans-serif, Arial;
+        }
+
+        .section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pin-section {
+            border-top: dashed 2px var(--color-surface50);
+            border-left: dashed 2px var(--color-surface50);
+            border-right: dashed 2px var(--color-surface50); 
+            border-bottom: dashed 2px var(--color-surface50);
+        }
+
+        .content {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            padding: 0 10px;
+            position: relative;
+        }
+
+        .content ul {
+            font-size: 30px;
+            color: var(--color-surface-white);
+            margin: 0;
+            padding: 0;
+            padding-right: 10px;
+            list-style: none;
+            flex-grow: 0;
+        }
+
+        .content .fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background-color: var(--color-shockingly-green);
+        }
+
+        .content .right {
+            flex-grow: 1;
+            position: relative;
+            border-left: dashed 2px var(--color-surface50);
+        }
+
+        .right .slide {
+            position: absolute;
+            width: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            border-radius: 10px;
+        }
+
+        img {
+            width: 100%;
+            max-width: 300px;
+        }
+    </style>
+    <section class="section">
+        <h3>scroll down</h3>
+    </section>
+    <section class="section ">
+        <div class="content pin-section">
+            <ul class="list">
+                <li>Animate</li>
+                <li>Anything</li>
+                <li>With</li>
+                <li>GSAP</li>
+            </ul>
+            <div class="fill"></div>
+            <div class="right">
+                <div class="slide center">
+                    <img src="https://assets.codepen.io/16327/portrait-number-01.png" alt="" />
+                </div>
+                <div class="slide center">
+                    <img src="https://assets.codepen.io/16327/portrait-number-02.png" alt="" />
+                </div>
+                <div class="slide center">
+                    <img src="https://assets.codepen.io/16327/portrait-number-03.png" alt="" />
+                </div>
+                <div class="slide center">
+                    <img src="https://assets.codepen.io/16327/portrait-number-04.png" alt="" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section"></section>
+    <script>
+        console.clear();
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const list = document.querySelector(".list");
+        const fill = document.querySelector(".fill");
+        const listItems = gsap.utils.toArray("li", list);
+        const slides = gsap.utils.toArray(".slide");
+
+        const pinSections = gsap.utils.toArray(".pin-section");
+        const lists = gsap.utils.toArray(".list");
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".pin-section",
+                start: "top top",
+                end: "+=" + listItems.length * 50 + "%",
+                pin: true,
+                scrub: true
+                // markers: true
+            }
+        });
+
+        // First element visible, set the marker
+        fill &&
+            gsap.set(fill, {
+                scaleY: 1 / listItems.length,
+                transformOrigin: "top left"
+            });
+
+        listItems.forEach((item, i) => {
+            const previousItem = listItems[i - 1];
+            if (previousItem) {
+                tl.set(item, { color: "#0ae448" }, 0.5 * i)
+                    .to(
+                        slides[i],
+                        {
+                            autoAlpha: 1,
+                            duration: 0.2
+                        },
+                        "<"
+                    )
+                    .set(previousItem, { color: "#fffce1" }, "<")
+                    .to(
+                        slides[i - 1],
+                        {
+                            autoAlpha: 0,
+                            duration: 0.2
+                        },
+                        "<"
+                    );
+            } else {
+                gsap.set(item, { color: "#0ae448" });
+                gsap.set(slides[i], { autoAlpha: 1 });
+            }
+        });
+        tl.to(
+            fill,
+            {
+                scaleY: 1,
+                transformOrigin: "top left",
+                ease: "none",
+                duration: tl.duration()
+            },
+            0
+        ).to({}, {}); // add a small pause at the end of the timeline before it un-pins
+
+    </script>
+</body>
+
+</html>

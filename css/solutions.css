@@ -1,0 +1,16 @@
+/* 
+    Solution Section
+*/
+.solution_ac{
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+    overflow: hidden;
+    
+}
+
+
+
