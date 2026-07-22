@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pancel</title>
+    
+</head>
+<body>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+       /* wrapper controls scroll distance */
+        .stack-wrapper {
+            position: relative;
+        }
+
+
+        /* each section */
+        .stack-section {
+            
+            position: sticky;
+            top: 0;
+           
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: clamp(2rem, 5vw, 5rem);
+            font-weight: 700;
+            overflow: hidden;
+            animation: stack-section-anim 1s linear both;
+        }
+
+        @keyframes stack-section-anim {
+            0% { transform: translateY(0)translateZ(0) rotate(0); scale: (1); }
+            35% {transform: translateY(100px)translateZ(-200px) rotateX(8deg); scale: (.92);}
+            70% {transform: translateY(20px)translateZ(-120) rotateX(2deg); scale: (.95);}
+            100% {transform: translateY(0)translateZ(0) rotate(0); scale: (1);}
+        }
+
+
+        /* spacing between stacked panels */
+        .stack-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+           /*background: linear-gradient(180deg,
+                    transparent,
+                    rgba(0, 0, 0, 0.048));*/
+        }
+
+        /* individual cards */
+        .section-content {
+            position: relative;
+            z-index: 2;
+        }
+        .section-1 { top: 0; }
+        .section-2 { top: 2em; }
+        .section-3 { top: 6em; }
+
+        .stack-container{
+            height: 50dvh;
+            width: 100%;
+            border: 2px solid #707070;
+        }
+        .stack-container::before{
+            content: "";
+            border-right: 1px solid #707070;
+            position: absolute;
+            height:100%;
+            left: 70%;
+        }
+        .txt{
+            border-bottom: 1.5px solid #707070;
+            width: 70%;
+            margin: 0;
+        }
+        .na-panel{
+            font-size: .3em;
+        }
+      
+    </style>
+    <section class="stack-wrapper">
+        <article class="stack-section section-1">
+            <div class="stack-container">
+                <p class="txt"><span class="na-panel" >title</span></p>
+
+                 <div class="stack_content">
+                    <p style="display: block;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptatum illo a eum consequuntur quidem adipisci eligendi molestias ipsam molestiae, inventore tenetur quae obcaecati unde soluta id dolores nisi earum?</p>
+                </div>
+            </div>
+           
+            
+            
+        </article>
+        <article class="stack-section section-2"></article>
+        <article class="stack-section section-3"></article>
+        <article class="stack-section section-4"></article>
+    </section>
+</body>
+</html>

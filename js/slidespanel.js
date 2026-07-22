@@ -46,3 +46,44 @@
       tl.fromTo(panel, { scale: 1, opacity: 1 }, { scale: 0.7, opacity: 0.5, duration: 0.9 })
         .to(panel, { opacity: 0, duration: 0.1 });
     });
+
+
+
+
+    
+     const questions = document.querySelectorAll(".faq-question");
+        questions.forEach(question => {
+            question.addEventListener("click", () => {
+                const item = question.parentElement;
+                const answer = item.querySelector(".answer");
+                document.querySelectorAll(".faq-item").forEach(i => {
+
+                    if (i !== item) {
+
+                        i.classList.remove("active");
+                        i.querySelector(".answer").style.maxHeight = null;
+
+                    }
+
+                });
+
+                item.classList.toggle("active");
+
+                if (item.classList.contains("active")) {
+
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+
+                }
+
+                else {
+
+                    answer.style.maxHeight = null;
+
+                }
+
+
+            });
+
+
+        });
+

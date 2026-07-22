@@ -24,7 +24,7 @@ section{ scroll-margin-top: 85px; }
   display:inline-flex;
   align-items:center;
   gap:.55em;
-  color:var(--ink-soft);
+  color:var(--ink);
 }
 .eyehead::before{
   content:'';

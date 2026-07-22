@@ -2,264 +2,468 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Sections</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Observer.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+
+    <title>Awwwards Style FAQ</title>
+
+
     <style>
         * {
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-        a {
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            opacity: 0.8;
-        }
-
-        body {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            color: #ffffff;
-            text-transform: uppercase;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            box-sizing: border-box;
         }
 
-        h2 {
-            font-size: clamp(1rem, 6vw, 10rem);
-            font-weight: 600;
-            line-height: 1.2;
-            text-align: center;
-            margin-right: -0.5em;
-            width: 90vw;
-            max-width: 1200px;
-            text-transform: none;
+
+        html,
+        body {
+
+            width: 100%;
+            min-height: 100%;
+
+            font-family:
+                Inter,
+                "Helvetica Neue",
+                Arial,
+                sans-serif;
+
         }
 
-        header {
+
+        /* =========================
+   SVG BACKGROUND
+========================= */
+
+
+        .svg-wrapper {
+
             position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: -2;
+
+        }
+
+
+        svg {
+
+            width: 100%;
+            height: 100%;
+
+        }
+
+
+
+
+
+        /* =========================
+   FAQ SECTION
+========================= */
+
+
+        .faq-section {
+
+            min-height: 100vh;
+
             display: flex;
+
             align-items: center;
+
+            justify-content: center;
+
+            padding: 60px 20px;
+
+
+        }
+
+        .faq-box {
+            width: min(950px, 100%);
+            background: #fff;
+            padding:clamp(30px, 5vw, 70px);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, .18);
+            animation: reveal 1s ease forwards;
+        }
+
+        @keyframes reveal {
+
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .faq-heading {
+            display: flex;
             justify-content: space-between;
-            padding: 0 5%;
-            width: 100%;
-            z-index: 3;
-            height: 7em;
-            font-size: clamp(0.66rem, 2vw, 1rem);
-            letter-spacing: 0.5em;
-            background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+            align-items: end;
+            margin-bottom: 50px;
         }
-
-        section {
-            height: 100%;
-            width: 100%;
-            top: 0;
-            position: fixed;
-            visibility: hidden;
+        .faq-heading h1 {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            line-height: .95;
+            letter-spacing: -3px;
+            color: #111;
         }
-
-        .outer,
-        .inner {
-            width: 100%;
-            height: 100%;
+        .faq-heading span {
+            font-size: .9rem;
+            color: #777;
+        }
+        /* FAQ ITEMS */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .faq-item {
+            border-bottom: 1px solid #ddd;
             overflow: hidden;
         }
 
-        .bg {
+        .faq-question {
+            width: 100%;
+            padding: 28px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: 0;
+            cursor: pointer;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 600;
+            text-align: left;
+            color: #111;
+        }
+        .arrow {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #111;
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            top: 0;
-            background-size: cover;
-            background-position: center;
+            transition: .5s;
         }
 
-        h2 {
-            z-index: 999;
-            position: relative;
-        }
-
-        .clip-text {
+        .faq-answer {
+            max-height: 0;
             overflow: hidden;
+            transition: max-height .7s cubic-bezier(.77, 0, .18, 1);
+        }
+        .faq-answer p {
+            padding-bottom: 25px;
+            max-width: 650px;
+            line-height: 1.7;
+            color: #555;
+        }
+        .faq-item.active .arrow {
+            transform: rotate(45deg);
         }
 
-        h2 * {
-            will-change: transform;
-        }
+        /* Mobile */
 
-        .first .bg {
-            background: linear-gradient(180deg, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.1) 100%), url("https://assets.codepen.io/16327/site-landscape-1.jpg");
-            background-size: cover;
-            background-position: center;
-        }
+        @media(max-width:600px) {
 
-        .second .bg {
-            background: linear-gradient(180deg, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.1) 100%), url("https://assets.codepen.io/16327/site-landscape-2.jpg");
-            background-size: cover;
-            background-position: center;
-        }
 
-        .third .bg {
-            background: linear-gradient(180deg, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.1) 100%), url("https://assets.codepen.io/16327/site-landscape-3.jpg");
-            background-size: cover;
-            background-position: center;
-        }
+            .faq-box {
 
-        .fourth .bg {
-            background: linear-gradient(180deg, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.1) 100%), url("https://assets.codepen.io/16327/site-landscape-4.jpg");
-            background-size: cover;
-            background-position: center;
-        }
+                border-radius: 25px;
 
-        .fifth .bg {
-            background: linear-gradient(180deg, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.1) 100%), url("https://assets.codepen.io/16327/site-landscape-5.jpg");
-            background-size: cover;
-            background-position: center;
+            }
+
+
+            .faq-heading {
+
+                display: block;
+
+            }
+
+
+            .faq-heading span {
+
+                display: block;
+
+                margin-top: 20px;
+
+            }
+
+
         }
     </style>
+
 </head>
 
+
 <body>
-    <header>
-        <div>Animated Sections</div>
-        <div><a href="#" onclick="alert('Scroll up or down to navigate!')">← Scroll to navigate →</a></div>
-    </header>
-    <section>/* the start section is a is a stand alone section with  no animation or effects */
-        <div class=""style="display: flex; justify-content: center; align-items: center; height: 100vh; color: #1c1e85; ">
-            <h2>start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h2>
+
+
+
+    <!-- ======================
+     ANIMATED SVG
+======================= -->
+
+
+    <div class="svg-wrapper">
+
+
+        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+
+
+            <defs>
+
+
+                <pattern id="diagonal" width="160" height="160" patternUnits="userSpaceOnUse">
+
+
+
+                    <animateTransform attributeName="patternTransform" type="translate" from="-160 0" to="0 0" dur="8s"
+                        repeatCount="indefinite" />
+
+
+
+                    <rect width="160" height="160" fill="#e7e7e7" />
+
+
+
+                    <polygon points="
+20,0
+110,0
+150,160
+60,160" fill="#252525" />
+
+
+                </pattern>
+
+
+            </defs>
+
+
+
+            <rect width="100%" height="100%" fill="url(#diagonal)" />
+
+
+        </svg>
+
+
+    </div>
+
+
+
+
+
+    <!-- ======================
+      FAQ
+======================= -->
+
+
+    <section class="faq-section">
+
+
+        <div class="faq-box">
+
+
+            <div class="faq-heading">
+
+
+                <h1>
+                    Questions<br>
+                    & Answers
+                </h1>
+
+
+                <span>
+                    FAQ / 2026
+                </span>
+
+
+            </div>
+
+
+
+            <div class="faq-list" id="faqList"></div>
+
+
+
         </div>
+
+
     </section>
 
-    <section class="first">
-        <div class="outer">
-            <div class="inner">
-                <div class="bg">
-                    <h2 class="section-heading">Scroll down</h2>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="second">
-        <div class="outer">
-            <div class="inner">
-                <div class="bg">
-                    <h2 class="section-heading">Animated with GSAP</h2>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="third">
-        <div class="outer">
-            <div class="inner">
-                <div class="bg">
-                    <h2 class="section-heading">GreenSock</h2>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="fourth">
-        <div class="outer">
-            <div class="inner">
-                <div class="bg">
-                    <h2 class="section-heading">Animation Platform</h2>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="fifth">
-        <div class="outer">
-            <div class="inner">
-                <div class="bg">
-                    <h2 class="section-heading">Keep scrolling</h2>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section>/* the end section is also a stand alone section with  no animation or effects end the page like a footer */
-        <div class="" style="display: flex; justify-content: center; align-items: center; height: 100vh; color: #1c1e85; ">
-            <h2>End!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h2>
-        </div>
-    </section>
 
     <script>
-        gsap.registerPlugin(Observer);
 
-        let sections = document.querySelectorAll("section"),
-            images = document.querySelectorAll(".bg"),
-            headings = gsap.utils.toArray(".section-heading"),
-            outerWrappers = gsap.utils.toArray(".outer"),
-            innerWrappers = gsap.utils.toArray(".inner"),
-            splitHeadings = headings.map(heading => new SplitText(heading, { type: "chars,words,lines", linesClass: "clip-text" })),
-            currentIndex = -1,
-            wrap = gsap.utils.wrap(0, sections.length),
-            animating;
 
-        gsap.set(outerWrappers, { yPercent: 100 });
-        gsap.set(innerWrappers, { yPercent: -100 });
+        // Dynamic FAQ Data
 
-        function gotoSection(index, direction) {
-            index = wrap(index);
-            animating = true;
-            let fromTop = direction === -1,
-                dFactor = fromTop ? -1 : 1,
-                tl = gsap.timeline({
-                    defaults: { duration: 1.25, ease: "power1.inOut" },
-                    onComplete: () => animating = false
-                });
-            if (currentIndex >= 0) {
-                gsap.set(sections[currentIndex], { zIndex: 0 });
-                tl.to(images[currentIndex], { yPercent: -15 * dFactor })
-                    .set(sections[currentIndex], { autoAlpha: 0 });
+
+        const faqData = [
+
+
+            {
+
+                q: "What services do you offer?",
+
+                a: "We create premium digital experiences including websites, applications, branding systems and custom software solutions."
+
+            },
+
+
+            {
+
+                q: "How long does development take?",
+
+                a: "Each project is different. A typical website project takes between 2-8 weeks depending on features and complexity."
+
+            },
+
+
+            {
+
+                q: "Can you redesign an existing website?",
+
+                a: "Yes. We improve outdated websites by rebuilding the structure, user experience, animations and performance."
+
+            },
+
+
+            {
+
+                q: "Do you provide maintenance?",
+
+                a: "Yes. We offer ongoing updates, security improvements and technical support after launch."
+
             }
-            gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
-            tl.fromTo([outerWrappers[index], innerWrappers[index]], {
-                yPercent: i => i ? -100 * dFactor : 100 * dFactor
-            }, {
-                yPercent: 0
-            }, 0)
-                .fromTo(images[index], { yPercent: 15 * dFactor }, { yPercent: 0 }, 0)
-                .fromTo(splitHeadings[index].chars, {
-                    autoAlpha: 0,
-                    yPercent: 150 * dFactor
-                }, {
-                    autoAlpha: 1,
-                    yPercent: 0,
-                    duration: 1,
-                    ease: "power2",
-                    stagger: {
-                        each: 0.02,
-                        from: "random"
-                    }
-                }, 0.2);
 
-            currentIndex = index;
-        }
 
-        Observer.create({
-            type: "wheel,touch,pointer",
-            wheelSpeed: -1,
-            onDown: () => !animating && gotoSection(currentIndex - 1, -1),
-            onUp: () => !animating && gotoSection(currentIndex + 1, 1),
-            tolerance: 10,
-            preventDefault: true
+        ];
+
+
+
+
+
+        const faqList = document.querySelector("#faqList");
+
+
+
+        faqData.forEach(item => {
+
+
+            faqList.innerHTML += `
+
+<div class="faq-item">
+
+
+<button class="faq-question">
+
+${item.q}
+
+
+<span class="arrow">
++
+</span>
+
+
+</button>
+
+
+<div class="faq-answer">
+
+<p>
+${item.a}
+</p>
+
+</div>
+
+
+</div>
+
+
+`;
+
+
         });
 
-        gotoSection(0, 1);
+
+
+
+
+        document.querySelectorAll(".faq-question")
+
+            .forEach(button => {
+
+
+                button.onclick = () => {
+
+
+                    const item = button.parentElement;
+
+                    const answer = item.querySelector(".faq-answer");
+
+
+
+                    document.querySelectorAll(".faq-item")
+
+                        .forEach(other => {
+
+
+                            if (other !== item) {
+
+                                other.classList.remove("active");
+
+                                other.querySelector(".faq-answer")
+                                    .style.maxHeight = null;
+
+                            }
+
+
+                        });
+
+
+
+                    item.classList.toggle("active");
+
+
+
+                    if (item.classList.contains("active")) {
+
+
+                        answer.style.maxHeight =
+                            answer.scrollHeight + "px";
+
+
+                    }
+
+                    else {
+
+
+                        answer.style.maxHeight = null;
+
+
+                    }
+
+
+                };
+
+
+            });
+
+
+
     </script>
+
+
 </body>
 
 </html>

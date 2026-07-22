@@ -3,14 +3,91 @@
 */
 .solution_ac{
     position: relative;
-    min-height: 100vh;
+   /* min-height: 100vh;
+   */
     display: flex;
     align-items: center;
     padding-top: 6rem;
     padding-bottom: 3rem;
     overflow: hidden;
+}
+.solution_ac2{
     
+    position: relative;
+   /* min-height: 100vh;
+   */
+    display: flex;
+    align-items: center;
+    padding-bottom: 3rem;
+    overflow: hidden;
+}
+.flx{ display:flex;
+    flex-direction: column;
+}
+.img_b{
+    display:flex;
+    justify-content: center;
+    overflow: hidden;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+.gd-img{
+    overflow: hidden;
+    width: 320px;
+    height: 100%;
+    object-fit: cover;
 }
 
 
 
+        /* wrapper controls scroll distance */
+        .stack-wrapper {
+            position: relative;
+        }
+
+
+        /* each section */
+        .stack-section {
+            
+            position: sticky;
+            top: 0;
+           
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: clamp(2rem, 5vw, 5rem);
+            font-weight: 700;
+            background: var(--ink-soft);
+            overflow: hidden;
+            animation: stack-section-anim 1s linear both;
+        }
+
+        @keyframes stack-section-anim {
+            0% { transform: translateY(0)translateZ(0) rotate(0); scale: (1); }
+            35% {transform: translateY(100px)translateZ(-200px) rotateX(8deg); scale: (.92);}
+            70% {transform: translateY(20px)translateZ(-120) rotateX(2deg); scale: (.95);}
+            100% {transform: translateY(0)translateZ(0) rotate(0); scale: (1);}
+        }
+
+
+        /* spacing between stacked panels */
+        .stack-section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    transparent,
+                    rgba(0, 0, 0, 0.048));
+        }
+
+
+        /* individual cards */
+        .section-content {
+            position: relative;
+            z-index: 2;
+        }
+        .section-1 { top: 0; }
+        .section-2 { top: 2em; }
+        .section-3 { top: 6em; }
+      

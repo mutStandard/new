@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Stack Sections</title>
+    <link rel="stylesheet" href="css/mid_sec.css">
+    <link rel="stylesheet" href="css/sec.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+
+        /* wrapper controls scroll distance */
+        .stack-wrapper {
+            position: relative;
+        }
+
+
+        /* each section */
+        .stack-section {
+            height: 70vh;
+            position: sticky;
+            top: 0;
+            align-items: center;
+            font-size: clamp(2rem, 5vw, 2rem);
+            font-weight: 700;
+            overflow: hidden;
+        }
+
+
+        /* spacing between stacked panels */
+        .stack-section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+        }
+
+
+        /* individual cards */
+        .section-content {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* different section heights create stack */
+        .bg { background: #6e6e6e;}
+        .section-2 {
+            border-top: 2px solid #111;
+            top: 40px;
+        }
+        .section-3 {
+            border-top: 2px solid #111;
+            top: 80px;
+        }
+        .section-4 {
+            border-top: 2px solid #111;
+            top: 124px;
+        }
+
+        .section-5 {
+            top: 180px;
+            height: 100dvh;
+        }
+
+        .sbd::before {
+            content: "";
+            border-left: 2px solid #afadad;
+            position: absolute;
+            inset: 0;
+        }
+
+        .u {
+            content: "";
+            position: absolute;
+            border-top: #afadad;
+            width: 100%;
+        }
+
+        .b {
+            content: "";
+            position: absolute;
+            border-top: #afadad;
+            width: 100%;
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <div class="stack-wrapper">
+
+        <section class="stack-section section-1 bg">
+            <div class="section-content">
+                <span class="">Section one</span>
+                <div class="container content">
+                    <div class="mid_txtp flx">
+                        <div style="translate: none; rotate: none; scale: none; clip-path: inset(0%);">
+                            <img src="img/Notch img/ty-feague-syWixqLXjkQ-unsplash.jpg" class="gd-img" alt="" style="height: 350px;">
+                        </div>
+                    </div>
+                    <div class="mid_txtp flx">
+                          
+                        <p class="eyehead"
+                            style="position: relative; display: inline-block; translate: none; scale: none;opacity: 1;visibility: inherit; max-width: 50ch; justify-content: center; ">
+                            we design&amp;build in raw materials&ndash;concrete, steel, stone. We don't diguise how a building is
+                            made that the design.</p>
+                    </div>
+                </div>
+                <div class="sbd"></div>
+                <div class="b"></div>
+            </div>
+        </section>
+
+
+        <section class="stack-section section-2 bg">
+            <div class="section-content">
+                Section Two
+            </div>
+        </section>
+
+
+        <section class="stack-section section-3 bg">
+            <div class="section-content">
+                Section Three
+            </div>
+        </section>
+
+
+        <section class="stack-section section-4 bg">
+            <div class="section-content">
+                Section Four
+            </div>
+        </section>
+
+        <section class="stack-section section-5 bg" style="background-color: cornflowerblue;">
+            <div class="section-content">
+                
+            </div>
+        </section>
+
+
+    </div>
+
+
+</body>
+
+</html>

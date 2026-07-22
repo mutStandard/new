@@ -34,8 +34,8 @@
 /* ============================================================
    STATS
    ============================================================ */
-.stats{ display:grid; grid-template-columns:repeat(4,1fr); }
-.stats li{ padding:2.4rem var(--pad-inline); border-right:1px solid var(--line-on-ink); text-align:left; }
+.stats{ display:grid; grid-template-columns:repeat(3 ,1fr); }
+.stats li{ padding:2.4rem var(--pad-inline); border-right:1px solid var(--line-on-ink); text-align:center; }
 .stats li:last-child{ border-right:0; }
 .stat__num{ font-family:var(--ff-mono); font-size:clamp(2rem,4.5vw,3.2rem); color:var(--rust-bright); }
 .stat__label{ font-family:var(--ff-mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(237,232,222,.7); margin-top:.5rem; }
@@ -69,3 +69,17 @@
 .back-top{ display:inline-flex; align-items:center; gap:.5rem; }
 .back-top svg{ width:14px; height:14px; transition:transform .2s ease; }
 .back-top:hover svg{ transform:translateY(-3px); }
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(27, 24, 20, .78);
+    z-index: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease;
+}

@@ -26,20 +26,14 @@
             height: 100%;
             background: var(--line);
         }
-        .griddleft,.griddright {padding: 60px;}
+        .griddleft,.griddright {padding: 20px;}
         .label {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-family: paralucent-stencil,sans-serif;
+            font-family: var(--bb-display);
             font-size: 15px;
             margin-bottom: 45px;
-        }
-
-        .square {
-            width: 14px;
-            height: 14px;
-            background: #3e22ff;
         }
 
         .image {
@@ -64,8 +58,8 @@
         .griddleft::before{
             content: "";
             position: absolute;
-            top: -150px;
-            bottom: -150px;
+            top: -200px;
+            bottom: -200px;
             left: -30px;
             border-right: 1px solid var(--line);
         }
@@ -77,8 +71,8 @@
         .griddright::after {
             content: "";
             position: absolute;
-            top: -150px;
-            bottom: -150px;
+            top: -200px;
+            bottom: -200px;
             right: -30px;
             border-left: 1px solid var(--line);
         }
@@ -119,9 +113,12 @@
         @media(max-width:900px) {
             .sect {grid-template-columns: 1fr;}
             .sect::after {display: none;}
-            .griddleft,.griddright { padding: 40px;}
+            .griddleft,.griddright { padding: 20px;}
             .griddright h2 { font-size: 46px; }
             .griddright p { width: 100%;}
             .image {max-width: 100%;}
 
+        }
+        @media (min-width:900px) {
+            
         }

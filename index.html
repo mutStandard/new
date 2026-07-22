@@ -43,14 +43,15 @@
             --paper: #EDE8DE;
             --ink: #313131;
             --ink-soft: #cccbc9;
-            --rust: #1e5aa8;
-            --rust-bright: #0d53a3;
-            --rust-deep: #1335f5;
+            --rust: #474f5a;
+            --rust-bright: #434446;
+            --rust-deep: #484c64;
             --steel: #6B7178;
             --safety: #3b6dd9;
-            --line: rgba(27, 24, 20, 0.18);
+            --line: #1b18142e;
             --line-on-ink: rgba(237, 232, 222, 0.22);
             --ff-display: 'Big Shoulders Display', sans-serif;
+            --bb-display: paralucent-stencil,sans-serif;
             --ff-body: 'Archivo', sans-serif;
             --ff-mono: 'IBM Plex Mono', monospace;
             --container: 1280px;
@@ -72,7 +73,6 @@
         body {
             margin: 0;
             scroll-behavior: smooth;
-            background-color: var(--paper);
         }
     
         a {
@@ -94,22 +94,15 @@
             margin: 0;
         }
     
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
+        h1,h2,h3,h4,h5,h6{
             margin: 0;
             font-weight: normal;
         }
-    
         body {
             font-family: var(--cc-font-family);
             font-size: 1rem;
             line-height: 1.5;
             color: var(--text);
-    
         }
     
         /* ---------- NAVBAR ---------- */
@@ -247,502 +240,6 @@
             }
         }
     
-    
-        /* ============================================================
-       PROCESS / STRATA
-       ============================================================ */
-        .process__layout {
-            display: grid;
-            grid-template-columns: .85fr 1.15fr;
-            gap: clamp(2rem, 5vw, 4rem);
-            align-items: center;
-        }
-    
-        .strata {
-            position: relative;
-            padding-bottom: 2.4rem;
-        }
-    
-        .strata__ground {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 2.4rem;
-            height: 1px;
-            background: var(--ink);
-        }
-    
-        .strata__ground::after {
-            content: 'GROUND LEVEL · 0.0M';
-            position: absolute;
-            right: 0;
-            top: -1.4rem;
-            font-family: var(--ff-mono);
-            font-size: .65rem;
-            letter-spacing: .08em;
-            color: var(--ink-soft);
-        }
-    
-        .strata__stack {
-            display: flex;
-            flex-direction: column-reverse;
-            gap: 6px;
-        }
-    
-        .layer {
-            height: 64px;
-            position: relative;
-            transition: transform .6s cubic-bezier(.2, .6, .2, 1), opacity .5s ease;
-            display: flex;
-            align-items: center;
-            padding-inline: 1rem;
-        }
-    
-        .js .layer {
-            transform: scaleY(0);
-            transform-origin: bottom;
-            opacity: 0;
-        }
-    
-        .process__layout.in-view .layer {
-            opacity: 1;
-            transform: scaleY(1);
-        }
-    
-        .process__layout.in-view .layer--foundation {
-            transition-delay: 0s;
-        }
-    
-        .process__layout.in-view .layer--structure {
-            transition-delay: .18s;
-        }
-    
-        .process__layout.in-view .layer--envelope {
-            transition-delay: .36s;
-        }
-    
-        .process__layout.in-view .layer--finish {
-            transition-delay: .54s;
-        }
-    
-        .layer--foundation {
-            background: var(--ink);
-            color: var(--paper);
-            height: 54px;
-        }
-    
-        .layer--structure {
-            background: var(--steel);
-            color: var(--paper);
-        }
-    
-        .layer--envelope {
-            background: var(--concrete-deep);
-        }
-    
-        .layer--finish {
-            background: var(--paper);
-            border: 1px solid var(--line);
-        }
-    
-        .layer__mark {
-            font-family: var(--ff-mono);
-            font-size: .68rem;
-            letter-spacing: .06em;
-            opacity: .85;
-            min-width: 4.4rem;
-        }
-    
-        .layer__name {
-            font-family: var(--ff-display);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 1.05rem;
-            margin-left: .8rem;
-        }
-    
-        .process__notes {
-            border-top: 1px solid var(--line);
-        }
-    
-        .process__notes li {
-            padding: 1.4rem 0;
-            border-bottom: 1px solid var(--line);
-        }
-    
-        .process__notes .p-mark {
-            font-family: var(--ff-mono);
-            font-size: .72rem;
-            color: var(--rust);
-            letter-spacing: .06em;
-        }
-    
-        .process__notes .p-title {
-            font-family: var(--ff-display);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 1.25rem;
-            margin-top: .25rem;
-        }
-    
-        .process__notes p {
-            margin-top: .4rem;
-            color: var(--ink-soft);
-            line-height: 1.6;
-            max-width: 34rem;
-        }
-    
-        /* ============================================================
-       STATS
-       ============================================================ */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-        }
-    
-        .stats li {
-            padding: 2.4rem var(--pad-inline);
-            border-right: 1px solid var(--line-on-ink);
-            text-align: left;
-        }
-    
-        .stats li:last-child {
-            border-right: 0;
-        }
-    
-        .stat__num {
-            font-family: var(--ff-mono);
-            font-size: clamp(2rem, 4.5vw, 3.2rem);
-            color: var(--rust-bright);
-        }
-    
-        .stat__label {
-            font-family: var(--ff-mono);
-            font-size: .7rem;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            color: rgba(237, 232, 222, .7);
-            margin-top: .5rem;
-        }
-    
-        /* ============================================================
-       CTA
-       ============================================================ */
-        .cta {
-            position: relative;
-            text-align: left;
-            overflow: hidden;
-        }
-    
-        .cta__grid {
-            position: absolute;
-            inset: 0;
-            opacity: .4;
-            pointer-events: none;
-            background-image: linear-gradient(var(--line-on-ink) 1px, transparent 1px), linear-gradient(90deg, var(--line-on-ink) 1px, transparent 1px);
-            background-size: 48px 48px;
-        }
-    
-        .cta__inner {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-    
-        .cta h2 {
-            font-size: clamp(2.6rem, 7vw, 5.2rem);
-            max-width: 36rem;
-        }
-    
-        .cta__right {
-            max-width: 22rem;
-        }
-    
-        .cta__right p {
-            line-height: 1.6;
-            color: rgba(237, 232, 222, .78);
-            margin-bottom: 1.4rem;
-        }
-    
-        .cta .contact-mono {
-            margin-top: 2rem;
-            font-family: var(--ff-mono);
-            font-size: .85rem;
-            color: rgba(237, 232, 222, .7);
-            line-height: 1.8;
-        }
-    
-        /* ============================================================
-       FOOTER
-       ============================================================ */
-        .footer {
-            padding-top: var(--section-pad);
-            padding-bottom: 2rem;
-        }
-    
-        .footer__grid {
-            display: grid;
-            grid-template-columns: 1.4fr .8fr .8fr;
-            gap: 2.5rem;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid var(--line-on-ink);
-        }
-    
-        .footer__brand {
-            display: flex;
-            align-items: center;
-            gap: .6rem;
-            font-family: var(--ff-mono);
-            font-size: 1.05rem;
-        }
-    
-        .footer__brand svg {
-            width: 20px;
-            height: 20px;
-        }
-    
-        .footer p.tag {
-            margin-top: 1rem;
-            max-width: 22rem;
-            color: rgba(237, 232, 222, .7);
-            line-height: 1.6;
-        }
-    
-        .footer h3 {
-            font-family: var(--ff-mono);
-            font-size: .7rem;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            color: rgba(237, 232, 222, .55);
-            margin-bottom: 1rem;
-        }
-    
-        .footer__links li {
-            margin-bottom: .7rem;
-            font-size: .95rem;
-        }
-    
-        .footer__links a:hover {
-            color: var(--rust);
-        }
-    
-        .footer address {
-            font-family: var(--ff-mono);
-            font-style: normal;
-            font-size: .85rem;
-            line-height: 1.9;
-            color: rgba(237, 232, 222, .78);
-        }
-    
-        .footer__bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1.6rem;
-            font-family: var(--ff-mono);
-            font-size: .72rem;
-            letter-spacing: .04em;
-            color: rgba(237, 232, 222, .55);
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-    
-        .back-top {
-            display: inline-flex;
-            align-items: center;
-            gap: .5rem;
-        }
-    
-        .back-top svg {
-            width: 14px;
-            height: 14px;
-            transition: transform .2s ease;
-        }
-    
-        .back-top:hover svg {
-            transform: translateY(-3px);
-        }
-    
-        /* ============================================================
-       PROCESS / STRATA
-       ============================================================ */
-        .process__layout {
-            display: grid;
-            grid-template-columns: .85fr 1.15fr;
-            gap: clamp(2rem, 5vw, 4rem);
-            align-items: center;
-        }
-    
-        .strata {
-            position: relative;
-            padding-bottom: 2.4rem;
-        }
-    
-        .strata__ground {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 2.4rem;
-            height: 1px;
-            background: var(--ink);
-        }
-    
-        .strata__ground::after {
-            content: 'GROUND LEVEL · 0.0M';
-            position: absolute;
-            right: 0;
-            top: -1.4rem;
-            font-family: var(--ff-mono);
-            font-size: .65rem;
-            letter-spacing: .08em;
-            color: var(--ink-soft);
-        }
-    
-        .strata__stack {
-            display: flex;
-            flex-direction: column-reverse;
-            gap: 6px;
-        }
-    
-        .layer {
-            height: 64px;
-            position: relative;
-            transition: transform .6s cubic-bezier(.2, .6, .2, 1), opacity .5s ease;
-            display: flex;
-            align-items: center;
-            padding-inline: 1rem;
-        }
-    
-        .js .layer {
-            transform: scaleY(0);
-            transform-origin: bottom;
-            opacity: 0;
-        }
-    
-        .process__layout.in-view .layer {
-            opacity: 1;
-            transform: scaleY(1);
-        }
-    
-        .process__layout.in-view .layer--foundation {
-            transition-delay: 0s;
-        }
-    
-        .process__layout.in-view .layer--structure {
-            transition-delay: .18s;
-        }
-    
-        .process__layout.in-view .layer--envelope {
-            transition-delay: .36s;
-        }
-    
-        .process__layout.in-view .layer--finish {
-            transition-delay: .54s;
-        }
-    
-        .layer--foundation {
-            background: var(--ink);
-            color: var(--paper);
-            height: 54px;
-        }
-    
-        .layer--structure {
-            background: var(--steel);
-            color: var(--paper);
-        }
-    
-        .layer--envelope {
-            background: var(--concrete-deep);
-        }
-    
-        .layer--finish {
-            background: var(--paper);
-            border: 1px solid var(--line);
-        }
-    
-        .layer__mark {
-            font-family: var(--ff-mono);
-            font-size: .68rem;
-            letter-spacing: .06em;
-            opacity: .85;
-            min-width: 4.4rem;
-        }
-    
-        .layer__name {
-            font-family: var(--ff-display);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 1.05rem;
-            margin-left: .8rem;
-        }
-    
-        .process__notes {
-            border-top: 1px solid var(--line);
-        }
-    
-        .process__notes li {
-            padding: 1.4rem 0;
-            border-bottom: 1px solid var(--line);
-        }
-    
-        .process__notes .p-mark {
-            font-family: var(--ff-mono);
-            font-size: .72rem;
-            color: var(--rust);
-            letter-spacing: .06em;
-        }
-    
-        .process__notes .p-title {
-            font-family: var(--ff-display);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 1.25rem;
-            margin-top: .25rem;
-        }
-    
-        .process__notes p {
-            margin-top: .4rem;
-            color: var(--ink-soft);
-            line-height: 1.6;
-            max-width: 34rem;
-        }
-    
-        /* ============================================================
-       STATS
-       ============================================================ */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-        }
-    
-        .stats li {
-            padding: 2.4rem var(--pad-inline);
-            border-right: 1px solid var(--line-on-ink);
-            text-align: left;
-        }
-    
-        .stats li:last-child {
-            border-right: 0;
-        }
-    
-        .stat__num {
-            font-family: var(--ff-mono);
-            font-size: clamp(2rem, 4.5vw, 3.2rem);
-            color: var(--rust-bright);
-        }
-    
-        .stat__label {
-            font-family: var(--ff-mono);
-            font-size: .7rem;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            color: rgba(237, 232, 222, .7);
-            margin-top: .5rem;
-        }
     </style>
 
     <nav class="navbar">
@@ -829,84 +326,176 @@
                     </h2>
                 </div>
             </div>
-            <p class="mid__sub"
-                style="position: relative; display: inline-block; translate: none; scale: none;opacity: 1;visibility: inherit;">
-                we design&amp;build in raw materials&ndash;concrete, steel, stone. We don't diguise how a building is
-                made that the design.</p>
+            <div class="mid_txtp">
+                <img src="img/Notch img/IMG-20260120-WA0009.jpg " alt="" style="width: 400px;">
+                <p class="eyehead"
+                    style="position: relative; display: inline-block; translate: none; scale: none;opacity: 1;visibility: inherit; max-width: 50ch; justify-content: center; ">
+                    we design&amp;build in raw materials&ndash;concrete, steel, stone. We don't diguise how a building is
+                    made that the design.</p>
+            </div>
         </div>
-    </section>
-
-
-    <!-- the second section -->
-     <section class="solution_ac">
-        <div class="grid-line"></div>
-        <div class="container content sect ">
-            <div class="mid_txt">
-                <span class="eyehead">Overview of our Work</span>
-                <div class=" griddleft">
-                    
-                </div>
-                <div class="griddright"></div>
-                <div class="bottom-line"></div>
-     </section>
-
-
+    </section>    
     <!-- ============================================================
      PROCESS / STRATA
      ============================================================ -->
-    <section class="section section--paper" id="process">
-        <div class="container">
-            <div class="section-head">
-                <span class="eyebrow reveal">How We Build</span>
-                <h2 class="h-display reveal reveal-delay-1">Four layers, poured in order.</h2>
-            </div>
-            <div class="process__layout">
-                <div class="strata">
-                    <div class="strata__stack">
-                        <div class="layer layer--foundation"><span class="layer__mark">&minus;3.0M</span><span
-                                class="layer__name">Foundation</span></div>
-                        <div class="layer layer--structure"><span class="layer__mark">0.0M</span><span
-                                class="layer__name">Structure</span></div>
-                        <div class="layer layer--envelope"><span class="layer__mark">+4.5M</span><span
-                                class="layer__name">Envelope</span></div>
-                        <div class="layer layer--finish"><span class="layer__mark">+8.0M</span><span
-                                class="layer__name">Finish</span></div>
+    <div class="stack-wrapper">
+
+        <section class="solution_ac stack-section section-1">
+            <div class="container content sect section-content ">
+                <div class="mid_txt flx">
+                    <p class="hero__sub"style="position: relative; display: inline-block; color: var(--ink)"><span >Solution.01</span></p>
+                    <div class=" griddleft">
+                        <div style="translate: none; rotate: none; scale: none; clip-path: inset(0%);">
+                            <img src="img/Notch img/ty-feague-syWixqLXjkQ-unsplash.jpg" class="gd-img" alt="">
+                        </div>
+    
                     </div>
-                    <div class="strata__ground"></div>
+                    <div class="griddright"></div>
+                    <div class="bottom-line"></div>
                 </div>
-                <ul class="process__notes">
-                    <li>
-                        <span class="p-mark">&minus;3.0M</span>
-                        <h3 class="p-title">Foundation</h3>
-                        <p>Reinforced footings, poured to depth and left to cure before anything else happens on site.
+                <div class="">
+                    <h3><span>Civil works</span></h3>
+                    <p class="eyehead"
+                        style="position: relative; display: inline-block; translate: none; scale: none;opacity: 1;visibility: inherit; max-width: 70ch; justify-content: center;  padding: 2rem;">
+                        we design&amp;build in raw materials&ndash;concrete, steel, stone. We don't diguise how a building
+                        is
+                        made that the design.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="solution_ac2 stack-section section-2">
+            <div class="container content sect section-content ">
+                <div class="mid_txt flx">
+                    <p><span class="eyehead">Solution.02</span></p>                                                         
+                    <div class=" griddleft">
+                        <div style="translate: none; rotate: none; scale: none; clip-path: inset(0%);">
+                            <img src="img/Notch img/IMG-20241213-WA0007.jpg" class="gd-img" alt="">
+                        </div>
+    
+                    </div>
+                    <div class="griddright"></div>
+                    <div class="bottom-line"></div>
+                </div>
+                <div class="">
+                    <h3></h3>
+                    <p class="eyehead"
+                        style="position: relative; display: inline-block; translate: none; scale: none;opacity: 1;visibility: inherit; max-width: 70ch; justify-content: center;  padding: 2rem;">
+                        we design&amp;build in raw materials&ndash;concrete, steel, stone. We don't diguise how a building
+                        is
+                        made that the design.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="solution_ac2 stack-section section-3">
+            <div class="container content sect section-content">
+                <div class="mid_txt flx">
+                    <span class="eyehead">Solution.03</span>
+                    <div class=" griddleft">
+                        <div style="translate: none; rotate: none; scale: none; clip-path: inset(0%);">
+                            <img src="img/Notch img/IMG-20260408-WA0005.jpg" class="gd-img" alt="">
+                        </div>
+    
+                    </div>
+                    <div class="griddright"></div>
+                    <div class="bottom-line"></div>
+                </div>
+                <div class="">
+                    <h3></h3>
+                    <p class="eyehead"
+                        style="position: relative; display: inline-block; translate: none; scale: none;opacity: 1;visibility: inherit; max-width: 70ch; justify-content: center;  padding: 2rem;">
+                        we design&amp;build in raw materials&ndash;concrete, steel, stone. We don't diguise how a building
+                        is
+                        made that the design.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- ============================================================
+     FAQ
+     ============================================================ -->
+    <section class="faq-section">
+        <div class="faq-header">
+            <span>FAQ</span>
+            <div class="line"></div>
+        </div>
+        <div class="faq-container">
+            <div>
+                <h1 class="faq-title">
+                    Frequently asked
+                    questions
+                </h1>
+                <p class="faq-description">
+                    Find answers to common questions about our investment solutions,
+                    services and approach to creating long-term value.
+                </p>
+                <div class="learn">
+                    Learn More
+                    <div class="circle">
+                        →
+                    </div>
+                </div>
+            </div>
+            <div class="faq-box">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>
+                            What makes your investment approach different?
+                        </h3>
+                        <div class="arrow">
+                            →
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <p>
+                            We combine institutional investment strategies with
+                            personalized solutions designed for individual investors.
                         </p>
-                    </li>
-                    <li>
-                        <span class="p-mark">0.0M</span>
-                        <h3 class="p-title">Structure</h3>
-                        <p>A concrete core or steel frame — whichever carries the load most honestly for that site.</p>
-                    </li>
-                    <li>
-                        <span class="p-mark">+4.5M</span>
-                        <h3 class="p-title">Envelope</h3>
-                        <p>Facade, glazing and weatherproofing, sized to the climate rather than to a standard
-                            catalogue.</p>
-                    </li>
-                    <li>
-                        <span class="p-mark">+8.0M</span>
-                        <h3 class="p-title">Finish</h3>
-                        <p>Floors, fixtures, final inspection. The building is signed off, not just switched on.</p>
-                    </li>
-                </ul>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>
+                            Who can access your investment solutions?
+                        </h3>
+                        <div class="arrow">
+                            →
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <p>
+                            Our solutions are designed for qualified investors,
+                            financial advisors and long-term partners.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>
+                            How do I get started investing?
+                        </h3>
+                        <div class="arrow">
+                            →
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <p>
+                            Contact our team to discuss your objectives,
+                            investment preferences and available opportunities.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
 
     <!-- ============================================================
      STATS
      ============================================================ -->
-    <section class="section--ink on-ink" style="padding-block:0;">
+    <section class="section--ink on-ink" style="padding-block:0; background-color: var(--ink);">
         <noscript>
             <style>
                 .stat__num {
@@ -928,8 +517,6 @@
             </li>
             <li><span class="stat__num" data-count="62">0</span><br><span class="stat__label">Sites Delivered</span>
             </li>
-            <li><span class="stat__num" data-count="0">0</span><br><span class="stat__label">Lost-Time Incidents</span>
-            </li>
             <li><span class="stat__num" data-count="3">0</span><br><span class="stat__label">Countries of Work</span>
             </li>
         </ul>
@@ -938,7 +525,7 @@
     <!-- ============================================================
      CTA
      ============================================================ -->
-    <section class="section section--ink on-ink cta" id="contact">
+    <section class="section section--ink on-ink cta" id="contact" style="background-color: var(--ink);">
         <div class="cta__grid" aria-hidden="true"></div>
         <div class="container cta__inner">
             <h2 class="h-display reveal">Let's break ground.</h2>
@@ -959,7 +546,7 @@
     <!-- ============================================================
      FOOTER
      ============================================================ -->
-    <footer class="footer section--ink on-ink">
+    <footer class="footer section--ink on-ink" style="background-color: var(--ink);">
         <div class="container">
             <div class="footer__grid">
                 <div>

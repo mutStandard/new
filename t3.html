@@ -1,215 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overview Section</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Full Screen Animated Pattern</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        body {
-            font-family: Inter, sans-serif;
-            background: #fafafa;
-            color: #111;
-        }
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#fff;
+}
 
-        section {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 80px 0;
-        }
+.svg-wrapper{
+    width:100vw;
+    height:100vh;
+}
 
-        .container {
-            width: min(1200px, 90%);
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
+svg{
+    width:100%;
+    height:100%;
+    display:block;
+}
+@media (max-width:768px){
 
-        /* Grid divider */
-        .container::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 1px;
-            height: 100%;
-            background: #d6d6d6;
-        }
+    pattern{
+        width:100px;
+        height:100px;
+    }
 
-        .left,
-        .right {
-            padding: 60px;
-        }
-
-        .label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 15px;
-            margin-bottom: 45px;
-        }
-
-        .square {
-            width: 14px;
-            height: 14px;
-            background: #3e22ff;
-        }
-
-        .image {
-            width: 100%;
-            max-width: 360px;
-            aspect-ratio: 4/6;
-            overflow: hidden;
-        }
-
-        .image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: .6s;
-        }
-
-        .image:hover img {
-            transform: scale(1.05);
-        }
-
-        .left::before{
-            content: "";
-            position: absolute;
-            top: -75px;
-            bottom: -75px;
-            left: -40px;
-            border-right: 1px solid #b3b0b0;
-        }
-        .right {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .right::after {
-            content: "";
-            position: absolute;
-            top: -75px;
-            bottom: -75px;
-            right: -40px;
-            border-left: 1px solid #b3b0b0;
-        }
-
-        .right h2 {
-            font-size: 64px;
-            font-weight: 600;
-            line-height: 1;
-            margin-bottom: 25px;
-        }
-
-        .right p {
-            width: 75%;
-            font-size: 18px;
-            line-height: 1.8;
-            color: #666;
-        }
-
-        /* outer guide lines */
-
-        .container::before {
-            content: "";
-            position: absolute;
-            left: -75px;
-            right: -75px;
-            top: 0;
-            border-top: 1px solid #b3b0b0;
-        }
-
-        .bottom-line {
-            position: absolute;
-            left: -75px;
-            right: -75px;
-            bottom: 0;
-            border-bottom: 1px solid #b3b0b0;
-        }
-
-        @media(max-width:900px) {
-
-            .container {
-                grid-template-columns: 1fr;
-            }
-
-            .container::after {
-                display: none;
-            }
-
-            .left,
-            .right {
-                padding: 40px;
-            }
-
-            .right h2 {
-                font-size: 46px;
-            }
-
-            .right p {
-                width: 100%;
-            }
-
-            .image {
-                max-width: 100%;
-            }
-
-        }
-    </style>
+}
+</style>
 
 </head>
-
 <body>
 
-    <section>
+<div class="svg-wrapper">
 
-        <div class="container">
+<svg viewBox="0 0 1920 1080" preserveAspectRatio="none">
 
-            <div class="left">
+    <defs>
 
-                <div class="label">
-                    <div class="square"></div>
-                    <span>Overview of our Work</span>
-                </div>
+        <pattern
+            id="diagonal"
+            width="180"
+            height="180"
+            patternUnits="userSpaceOnUse">
 
-                <div class="image">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900" alt="">
-                </div>
+            <!-- Animate the pattern -->
+            <animateTransform
+                attributeName="patternTransform"
+                type="translate"
+                from="-180 0"
+                to="0 0"
+                dur="5s"
+                repeatCount="indefinite"/>
 
-            </div>
+            <!-- Background -->
+            <rect
+                width="180"
+                height="180"
+                fill="#d9d9d9"/>
 
-            <div class="right">
+            <!-- Stripe -->
+            <polygon
+                points="
+                15,0
+                95,0
+                165,180
+                85,180"
+                fill="#313131"/>
 
-                <h2>what we do</h2>
+        </pattern>
 
-                <p>
-                    An industrialized and digital process that integrates architectural design,
-                    engineering, production and on-site assembly to achieve precision,
-                    control, certainty and measurable results.
-                </p>
+    </defs>
 
-            </div>
+    <rect
+        width="100%"
+        height="100%"
+        fill="url(#diagonal)"/>
 
-            <div class="bottom-line"></div>
+</svg>
 
-        </div>
-
-    </section>
+</div>
 
 </body>
-
 </html>
